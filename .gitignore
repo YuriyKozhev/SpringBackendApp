@@ -1,6 +1,7 @@
 # Idea folders
 .idea/
-target/
+target/*
+!target/jacoco.exec
 out/
 
 # Compiled class file
