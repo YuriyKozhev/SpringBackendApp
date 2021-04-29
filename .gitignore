@@ -2,6 +2,7 @@
 .idea/
 target/*
 !target/jacoco.exec
+!target/jacoco-report
 out/
 
 # Compiled class file
