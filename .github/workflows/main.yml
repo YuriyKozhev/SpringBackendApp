@@ -34,7 +34,7 @@ jobs:
          
        # Make Maven clean and package
       - name: Maven Package
-        run: mvn -B clean package -DskipTests
+        run: mvn -B clean package
         
       # Add test coverage
       - name: Test Coverage
