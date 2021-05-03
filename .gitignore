@@ -1,8 +1,6 @@
 # Idea folders
 .idea/
-target/*
-!target/jacoco.exec
-!target/jacoco-report
+target/
 out/
 
 # Compiled class file
