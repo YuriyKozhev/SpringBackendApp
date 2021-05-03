@@ -1,13 +1,21 @@
 package com.yuriy.SpringBackendApp;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
-class SpringBackendAppTests {
+public class SpringBackendAppTests {
+
+	@Autowired
+	private Controller controller;
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
+		assertThat(controller).isNotNull();
 	}
+
 
 }
