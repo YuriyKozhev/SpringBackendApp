@@ -19,6 +19,20 @@ public class ControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private UserRepository userRepository;
+
+    @BeforeEach
+    private void setUp() {
+        User john = new User("john.smith@example.com", "john", "smith");
+        john.setId(1);
+        User alex = new User("alex.smith@example.com", "alex", "smith");
+        alex.setId(2);
+
+        when(userRepository.findAll())
+                .thenReturn(List.of(john, alex));
+    }
+
     @Test
     public void printMain() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
