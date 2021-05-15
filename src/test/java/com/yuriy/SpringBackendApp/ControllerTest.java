@@ -1,17 +1,25 @@
 package com.yuriy.SpringBackendApp;
 
+import com.yuriy.SpringBackendApp.repos.UserRepository;
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
 public class ControllerTest {
@@ -44,4 +52,20 @@ public class ControllerTest {
         this.mockMvc.perform(get("/greet")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello")));
     }
+
+    @Test
+    void getAllUsers() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(get("/users"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].email").exists())
+                .andExpect(jsonPath("$[0].email").value("john.smith@example.com"))
+                .andExpect(jsonPath("$[0].firstName").exists())
+                .andExpect(jsonPath("$[0].surName").exists())
+                .andReturn();
+
+        Assert.assertEquals("application/json",
+                mvcResult.getResponse().getContentType());
+    }
+
 }
