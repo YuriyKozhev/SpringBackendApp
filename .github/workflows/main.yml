@@ -38,7 +38,7 @@ jobs:
         
       # Add test coverage
       - name: Test Coverage
-        uses: codecov/codecov-action@v1.4.1
+        uses: codecov/codecov-action@v1.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: target/
